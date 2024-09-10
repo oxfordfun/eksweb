@@ -1,8 +1,8 @@
-# simple-web-app-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eksweb
+  namespace: web-apps
 spec:
   replicas: 2
   selector:
@@ -22,7 +22,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: eks-web-app-service
+  name: eksweb-service
+  namespace: web-apps
 spec:
   type: LoadBalancer
   selector:
@@ -31,4 +32,3 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 5000
- 

@@ -13,6 +13,7 @@ spec:
       labels:
         app: eksweb
     spec:
+      serviceAccountName: web-app-sa
       containers:
       - name: eksweb
         image: oxfordfun/eksweb:latest

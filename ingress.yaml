@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-app-ingress
+  namespace: web-apps
+spec:
+  ingressClassName: nginx 
+  rules:
+  - host: harwell.fun
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: eksweb-service
+            port:
+              number: 80
+  # tls:
+  # - hosts:
+  #   - harwell.fun
+  #   secretName: web-app-tls

@@ -26,10 +26,9 @@ metadata:
   name: eksweb-service
   namespace: web-apps
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: eksweb
   ports:
-  - protocol: TCP
-    port: 80
+  - port: 80
     targetPort: 5000

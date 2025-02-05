@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Response Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Proxy Response Information</h2>
+
+    <h3>Headers</h3>
+    <pre>{{ headers | tojson(indent=4) }}</pre>
+
+    <h3>Query Parameters</h3>
+    <pre>{{ query_params | tojson(indent=4) }}</pre>
+
+    <h3>Cookies</h3>
+    <pre>{{ cookies | tojson(indent=4) }}</pre>
+
+    <h3>X-Auth-Id-Token (JWT) - Decoded</h3>
+    {% if decoded_token %}
+        {% if "error" in decoded_token %}
+            <p class="error"><strong>Error:</strong> {{ decoded_token.error }}</p>
+        {% else %}
+            <p><strong>Header:</strong></p>
+            <pre>{{ decoded_token.header | tojson(indent=4) }}</pre>
+            <p><strong>Payload:</strong></p>
+            <pre>{{ decoded_token.payload | tojson(indent=4) }}</pre>
+        {% endif %}
+    {% else %}
+        <p class="error">⚠ No X-Auth-Id-Token found in headers.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

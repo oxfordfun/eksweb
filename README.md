@@ -1,10 +1,21 @@
 # eksweb
 A test web deploy to AWS EKS
 
+## Run locally
+```shell
+git clone https://github.com/oxfordfun/eksweb.git
+cd eksweb
+python3 -m venv env
+source env/bin/activate
+pip3 install -r requirement.txt
+FLASK_PORT=8080 FLASK_DEBUG=False python3 app.py
+```
+Then test the app at http://localhost:8080
+
 ## Build and run docker image
 ```shell
 docker build -t eksweb .
-docker run -d -p 8080:5000 eksweb:latest
+docker run -d -p 8080:5000 -e FLASK_PORT=5000 -e FLASK_DEBUG=False eksweb:latest
 ```
 
 Then test the app at http://localhost:8080
